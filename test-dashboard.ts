@@ -23,17 +23,9 @@ async function main() {
     console.log(act);
 
     console.log("Fetching chartData...");
-    const chart = await prisma.$queryRaw`
-      SELECT 
-        DATE("createdAt") as date,
-        COALESCE(SUM(total), 0) as revenue,
-        COUNT(*) as invoices
-      FROM "Invoice"
-      WHERE "createdAt" >= NOW() - INTERVAL '7 days'
-        AND "paymentStatus" = 'PAID'
-      GROUP BY DATE("createdAt")
-      ORDER BY date ASC
-    `;
+    const chart = await prisma.inventoryItem.findMany({
+      select: { id: true, name: true, category: true, quantity: true, minStock: true, sellingPrice: true }
+    }).then(items => items.filter(i => i.quantity <= i.minStock).sort((a, b) => a.quantity - b.quantity).slice(0, 5)).catch(() => []);
     console.log("Success", chart);
   } catch (e) {
     console.error("ERROR:", e);

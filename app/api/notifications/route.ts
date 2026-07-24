@@ -19,12 +19,9 @@ export async function GET() {
         include: { customer: { select: { name: true, mobile: true } } },
         orderBy: { createdAt: "asc" },
       }),
-      prisma.$queryRaw`
-        SELECT id, name, category, quantity, "minStock", "sellingPrice"
-        FROM "InventoryItem"
-        WHERE quantity <= "minStock"
-        ORDER BY quantity ASC
-      `.catch(() => []),
+      prisma.inventoryItem.findMany({
+        select: { id: true, name: true, category: true, quantity: true, minStock: true, sellingPrice: true }
+      }).then(items => items.filter(i => i.quantity <= i.minStock).sort((a, b) => a.quantity - b.quantity)).catch(() => []),
     ]);
 
     return NextResponse.json({

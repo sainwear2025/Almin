@@ -88,13 +88,9 @@ export async function GET() {
       include: { user: { select: { name: true } } },
     }),
     // Low stock items (where quantity <= minStock)
-    prisma.$queryRaw`
-      SELECT id, name, category, quantity, "minStock", "sellingPrice"
-      FROM "InventoryItem"
-      WHERE quantity <= "minStock"
-      ORDER BY quantity ASC
-      LIMIT 5
-    `.catch(() => []),
+    prisma.inventoryItem.findMany({
+      select: { id: true, name: true, category: true, quantity: true, minStock: true, sellingPrice: true }
+    }).then(items => items.filter(i => i.quantity <= i.minStock).sort((a, b) => a.quantity - b.quantity).slice(0, 5)).catch(() => []),
     // Last 7 days invoices
     prisma.invoice.findMany({
       where: {
