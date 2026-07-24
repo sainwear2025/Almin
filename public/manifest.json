@@ -1,7 +1,7 @@
 {
-  "name": "RA Seva Point",
-  "short_name": "RASeva",
-  "description": "One Stop for Books, Print & Digital Services",
+  "name": "Almin General Store",
+  "short_name": "Almin General Store",
+  "description": "Digital Service Point & General Store Management System",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0f1e",

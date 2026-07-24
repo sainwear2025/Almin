@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 // Default settings
 const DEFAULTS: Record<string, string> = {
-  shopName: "RA Seva Point",
+  shopName: "Almin General Store",
   tagline: "One Stop for Books, Print & Digital Services",
   upiId: "rasevapoint@upi",
   gstEnabled: "false",

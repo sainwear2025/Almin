@@ -213,7 +213,7 @@ export default function Header({ onMenuToggle, pageTitle }: HeaderProps) {
             className="legacy-button" 
             style={{ padding: '4px 8px', color: '#3b82f6' }}
             onClick={() => setShowAI(true)} 
-            title="RA Seva AI Assistant"
+            title="Almin General Store AI Assistant"
           >
             <Sparkles size={16} />
           </button>

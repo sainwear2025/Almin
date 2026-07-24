@@ -7,7 +7,7 @@ import { useDownload } from "@/contexts/DownloadContext";
 import PageHeader from "@/components/layout/PageHeader";
 
 const DEFAULT_SETTINGS = {
-  shopName: "RA Seva Point",
+  shopName: "Almin General Store",
   tagline: "One Stop for Books, Print & Digital Services",
   upiId: "rasevapoint@upi",
   gstEnabled: "false",

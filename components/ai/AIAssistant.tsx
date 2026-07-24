@@ -17,7 +17,7 @@ export default function AIAssistant({ isOpen, onClose }: AIAssistantProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Namaste! Main RA Seva Point ka AI Assistant hoon. Aapko shop details chahiye ya koi naya business idea, puchiye!",
+      content: "Namaste! Main Almin General Store ka AI Assistant hoon. Aapko shop details chahiye ya koi naya business idea, puchiye!",
     },
   ]);
   const [input, setInput] = useState("");
@@ -79,7 +79,7 @@ export default function AIAssistant({ isOpen, onClose }: AIAssistantProps) {
               <Sparkles size={20} />
             </div>
             <div>
-              <h2 className="font-semibold text-slate-800 dark:text-slate-200">RA Seva AI</h2>
+              <h2 className="font-semibold text-slate-800 dark:text-slate-200">Almin General Store AI</h2>
               <p className="text-xs text-blue-600 dark:text-blue-400 font-medium">Powered by Gemini</p>
             </div>
           </div>

@@ -330,7 +330,7 @@ export default function CustomerDetailPage({ params }: { params: Promise<{ id: s
               {totalDue > 0 && (
                 <button
                   type="button"
-                  onClick={() => sendWhatsApp(`Namaste ${customer.name} ji! 🙏\n\nRA Seva Point se aapka total pending due (udhaar) *${formatCurrency(totalDue)}* baaki hai.\n\nKripya ise jald se jald cash ya UPI dwara bhugtan karein.\n\nDhanyawad! 📱 RA Seva Point`)}
+                  onClick={() => sendWhatsApp(`Namaste ${customer.name} ji! 🙏\n\nAlmin General Store se aapka total pending due (udhaar) *${formatCurrency(totalDue)}* baaki hai.\n\nKripya ise jald se jald cash ya UPI dwara bhugtan karein.\n\nDhanyawad! 📱 Almin General Store`)}
                   style={{
                     width: "100%",
                     marginTop: "10px",

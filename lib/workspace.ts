@@ -303,7 +303,7 @@ export function getPageTitle(pathname: string): string {
     (module) => module.href !== "/" && pathname.startsWith(module.href)
   );
 
-  return nested?.label || "RA Seva Point";
+  return nested?.label || "Almin General Store";
 }
 
 export function matchesCommand(command: WorkspaceCommand, query: string): boolean {

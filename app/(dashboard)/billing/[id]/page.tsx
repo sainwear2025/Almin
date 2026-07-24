@@ -81,11 +81,11 @@ export default function InvoiceDetailPage({ params }: { params: Promise<{ id: st
 
   if (!invoice) return null;
 
-  const shopName = settings?.shopName || "RA SEVA POINT";
+  const shopName = settings?.shopName || "ALMIN GENERAL STORE";
   const shopTagline = settings?.tagline || "ONE STOP FOR BOOKS, PRINT & DIGITAL SERVICES";
   const shopAddress = settings?.shopAddress || "Front of High School, Sehaik, Amour, Purnea, Bihar - 854315";
   const shopPhone = settings?.shopPhone || "+91 7667538401";
-  const shopEmail = settings?.shopEmail || "ruhanahmad2017@gmail.com";
+  const shopEmail = settings?.shopEmail || "Alminstore@gmail.com";
   const upiId = settings?.upiId || "rasevapoint@upi";
 
   const upiLink = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(shopName)}&am=${invoice.total}&cu=INR&tn=Invoice%20${invoice.invoiceNumber}`;

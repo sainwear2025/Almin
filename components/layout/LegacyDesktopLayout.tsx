@@ -99,7 +99,7 @@ function LegacyDesktopInner({ children }: { children: React.ReactNode }) {
         <div className="legacy-window-titlebar">
           <div className="title-text" style={{ flex: 1 }}>
             <span style={{ fontSize: "14px", lineHeight: 1 }}>🔹</span>
-            {getWindowTitle()} - RA Seva Point
+            {getWindowTitle()} - Almin General Store
           </div>
 
           {/* Universal Search & Utility Icons centered in Title Bar */}

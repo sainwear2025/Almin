@@ -47,7 +47,7 @@ export default function ProtectPdfTool() {
       // Add metadata indicating protection request
       doc.setTitle(`[Protected] ${file.name.replace(".pdf", "")}`);
       doc.setKeywords(["protected", "ra-seva-point"]);
-      doc.setCreator("RA Seva Point PDF Suite");
+      doc.setCreator("Almin General Store PDF Suite");
 
       const bytes = await doc.save();
       const blob = new Blob([new Uint8Array(bytes)], { type: "application/pdf" });

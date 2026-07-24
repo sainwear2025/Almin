@@ -64,7 +64,7 @@ export default function AddSignatureTool() {
   const [hasDrawn, setHasDrawn] = useState(false);
 
   // Mode 2: Type Text State
-  const [typedName, setTypedName] = useState("RA Seva Point");
+  const [typedName, setTypedName] = useState("Almin General Store");
   const [selectedFont, setSelectedFont] = useState(FONT_STYLES[0].font);
   const [typedColor, setTypedColor] = useState("#000080");
 

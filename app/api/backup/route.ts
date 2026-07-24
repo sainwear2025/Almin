@@ -40,7 +40,7 @@ export async function GET() {
   ]);
 
   return NextResponse.json({
-    app: "RA Seva Point",
+    app: "Almin General Store",
     exportedAt: new Date().toISOString(),
     counts: {
       customers: customers.length,

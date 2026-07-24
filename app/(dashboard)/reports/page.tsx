@@ -181,7 +181,7 @@ export default function ReportsPage() {
       const doc = new jsPDF();
       doc.setFont("helvetica", "bold");
       doc.setFontSize(18);
-      doc.text("RA Seva Point - Financial Report", 20, 20);
+      doc.text("Almin General Store - Financial Report", 20, 20);
 
       doc.setFontSize(10);
       doc.setFont("helvetica", "normal");
@@ -804,7 +804,7 @@ export default function ReportsPage() {
                   })
                   .map((item) => {
                     const cleanMobile = item.customer.mobile.replace(/\D/g, "");
-                    const msg = `Namaste ${item.customer.name} ji! 🙏\n\nRA Seva Point se aapka total pending due (udhaar) *${formatCurrency(item.totalDue)}* baaki hai.\n\nKripya ise jald se jald cash ya Dukan ke UPI dwara bhugtan karein.\n\n📍 Shop: RA Seva Point\n\nDhanyawad! 📱`;
+                    const msg = `Namaste ${item.customer.name} ji! 🙏\n\nAlmin General Store se aapka total pending due (udhaar) *${formatCurrency(item.totalDue)}* baaki hai.\n\nKripya ise jald se jald cash ya Dukan ke UPI dwara bhugtan karein.\n\n📍 Shop: Almin General Store\n\nDhanyawad! 📱`;
                     const waUrl = `https://wa.me/91${cleanMobile}?text=${encodeURIComponent(msg)}`;
 
                     return (

@@ -41,7 +41,7 @@ export default function CrmPage() {
   }, []);
 
   const sendWhatsAppReminder = (item: PendingService) => {
-    const message = `Hello ${item.customer.name},\nThis is a friendly reminder from *RA Seva Point* regarding your pending service: *${item.serviceType}*.\nTotal Fees: ₹${item.fees}.\nPlease visit our shop to complete it.\nThank you!`;
+    const message = `Hello ${item.customer.name},\nThis is a friendly reminder from *Almin General Store* regarding your pending service: *${item.serviceType}*.\nTotal Fees: ₹${item.fees}.\nPlease visit our shop to complete it.\nThank you!`;
     const url = `https://wa.me/91${item.customer.mobile}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
     toast.success("WhatsApp web interface opened!");
@@ -118,21 +118,21 @@ export default function CrmPage() {
             <div className="p-3 rounded-xl border border-dashed" style={{ borderColor: "var(--border-secondary)" }}>
               <span className="font-bold text-slate-600 dark:text-slate-300">Template 1: Pending Work</span>
               <p className="text-slate-400 mt-1 leading-relaxed">
-                "Hello [Name], reminder from RA Seva Point regarding [Service]. Please visit us to submit details. Thanks!"
+                "Hello [Name], reminder from Almin General Store regarding [Service]. Please visit us to submit details. Thanks!"
               </p>
             </div>
 
             <div className="p-3 rounded-xl border border-dashed" style={{ borderColor: "var(--border-secondary)" }}>
               <span className="font-bold text-slate-600 dark:text-slate-300">Template 2: Payment Pending</span>
               <p className="text-slate-400 mt-1 leading-relaxed">
-                "Hello [Name], invoice for [Service] is pending payment of ₹[Fees]. Pay via UPI/Cash at RA Seva Point. Thanks!"
+                "Hello [Name], invoice for [Service] is pending payment of ₹[Fees]. Pay via UPI/Cash at Almin General Store. Thanks!"
               </p>
             </div>
 
             <div className="p-3 rounded-xl border border-dashed" style={{ borderColor: "var(--border-secondary)" }}>
               <span className="font-bold text-slate-600 dark:text-slate-300">Template 3: Ready for Delivery</span>
               <p className="text-slate-400 mt-1 leading-relaxed">
-                "Hello [Name], your document for [Service] is approved & ready for collection at RA Seva Point. Thanks!"
+                "Hello [Name], your document for [Service] is approved & ready for collection at Almin General Store. Thanks!"
               </p>
             </div>
           </div>

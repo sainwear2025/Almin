@@ -76,7 +76,7 @@ export default function ServiceDetailsDialog({ isOpen, onClose, serviceId, onSuc
 
   const handleSendWhatsApp = () => {
     if (!service || !service.customer.mobile) return;
-    const msg = encodeURIComponent(`Hi ${service.customer.name},\n\nYour service request for *${service.serviceType}* is currently marked as *${status}*.\n\nThank you,\nRA Seva Point`);
+    const msg = encodeURIComponent(`Hi ${service.customer.name},\n\nYour service request for *${service.serviceType}* is currently marked as *${status}*.\n\nThank you,\nAlmin General Store`);
     window.open(`https://wa.me/91${service.customer.mobile}?text=${msg}`, '_blank');
   };
 

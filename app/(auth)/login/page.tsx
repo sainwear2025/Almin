@@ -90,7 +90,7 @@ export default function LoginPage() {
 
           <div style={{ flex: 1 }}>
             <div style={{ marginBottom: '16px', fontSize: '11px' }}>
-              Type your user name and password to log on to the RA Seva Point network.
+              Type your user name and password to log on to the Almin General Store network.
             </div>
 
             {error && (

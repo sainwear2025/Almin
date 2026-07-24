@@ -105,7 +105,7 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ id: st
   const handleSendWhatsApp = () => {
     if (!service || !service.customer?.mobile) return;
     const msg = encodeURIComponent(
-      `Hello ${service.customer.name},\n\nUpdate on your service request for *${service.serviceType}*:\nStatus: *${STATUS_LABELS[status] || status}*\nPayment: *${paymentStatus}*\nRef No: #${service.id.slice(-6).toUpperCase()}\n\nThank you,\nRA Seva Point`
+      `Hello ${service.customer.name},\n\nUpdate on your service request for *${service.serviceType}*:\nStatus: *${STATUS_LABELS[status] || status}*\nPayment: *${paymentStatus}*\nRef No: #${service.id.slice(-6).toUpperCase()}\n\nThank you,\nAlmin General Store`
     );
     window.open(`https://wa.me/91${service.customer.mobile.replace(/\D/g, '').slice(-10)}?text=${msg}`, '_blank');
   };
@@ -145,7 +145,7 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ id: st
       {/* Printable Service Token Slip (Hidden on screen, visible on print) */}
       <div className="hidden print:block text-black font-mono p-6 border-2 border-black max-w-lg mx-auto">
         <div className="text-center pb-2 border-b-2 border-black mb-3">
-          <h2 className="text-xl font-bold uppercase">RA SEVA POINT</h2>
+          <h2 className="text-xl font-bold uppercase">ALMIN GENERAL STORE</h2>
           <p className="text-xs">Service Application Acknowledgment Slip</p>
         </div>
         <div className="text-xs space-y-1 mb-3">
@@ -177,7 +177,7 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ id: st
 
         <div className="border-t border-black pt-2 text-[10px] text-center">
           <p>Please keep this token slip for tracking your application status.</p>
-          <p className="font-bold mt-1">Thank you for visiting RA Seva Point!</p>
+          <p className="font-bold mt-1">Thank you for visiting Almin General Store!</p>
         </div>
       </div>
 

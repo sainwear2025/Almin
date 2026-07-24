@@ -3,8 +3,8 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "RA Seva Point",
-    template: "%s | RA Seva Point",
+    default: "Almin General Store",
+    template: "%s | Almin General Store",
   },
   description: "One Stop for Books, Print & Digital Services — Complete Shop Management System",
   keywords: ["seva point", "digital services", "government services", "print shop", "management"],

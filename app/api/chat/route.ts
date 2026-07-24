@@ -40,7 +40,7 @@ export async function POST(req: Request) {
       prisma.customer.count(),
     ]);
 
-    const systemPrompt = `You are a helpful AI assistant for "RA Seva Point", a digital service point shop. 
+    const systemPrompt = `You are a helpful AI assistant for "Almin General Store", a digital service point shop. 
 You answer questions about the shop, help with tasks, and provide business ideas.
 Always reply in a helpful, concise, and friendly manner. If asked in Hindi/Hinglish, reply in Hinglish.
 
