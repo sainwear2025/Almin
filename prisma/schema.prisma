@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
@@ -38,7 +38,7 @@ enum PaymentStatus {
 }
 
 model User {
-  id             String        @id @default(cuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   name           String
   email          String        @unique
   password       String
@@ -52,7 +52,7 @@ model User {
 }
 
 model Customer {
-  id             String        @id @default(cuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   name           String
   mobile         String        @unique
   email          String?
@@ -75,12 +75,12 @@ model Customer {
 }
 
 model Service {
-  id             String        @id @default(cuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   serviceType    String
   status         ServiceStatus @default(PENDING)
-  customerId     String
+  customerId String @db.ObjectId
   customer       Customer      @relation(fields: [customerId], references: [id])
-  assignedToId   String?
+  assignedToId String? @db.ObjectId
   assignedTo     User?         @relation(fields: [assignedToId], references: [id])
   fees           Float         @default(0)
   paymentStatus  PaymentStatus @default(UNPAID)
@@ -101,11 +101,11 @@ model Service {
 }
 
 model Invoice {
-  id             String        @id @default(cuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   invoiceNumber  String        @unique
-  customerId     String
+  customerId String @db.ObjectId
   customer       Customer      @relation(fields: [customerId], references: [id])
-  createdById    String
+  createdById String @db.ObjectId
   createdBy      User          @relation(fields: [createdById], references: [id])
   items          InvoiceItem[]
   subtotal       Float
@@ -126,8 +126,8 @@ model Invoice {
 }
 
 model InvoiceItem {
-  id             String   @id @default(cuid())
-  invoiceId      String
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  invoiceId String @db.ObjectId
   invoice        Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
   name           String
   quantity       Int
@@ -138,7 +138,7 @@ model InvoiceItem {
 }
 
 model Book {
-  id             String     @id @default(cuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   name           String
   author         String?
   category       String?
@@ -160,8 +160,8 @@ model Book {
 }
 
 model BookSale {
-  id         String   @id @default(cuid())
-  bookId     String
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  bookId String @db.ObjectId
   book       Book     @relation(fields: [bookId], references: [id])
   quantity   Int
   price      Float
@@ -173,7 +173,7 @@ model BookSale {
 }
 
 model InventoryItem {
-  id             String                  @id @default(cuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   name           String
   category       String
   purchasePrice  Float
@@ -191,8 +191,8 @@ model InventoryItem {
 }
 
 model InventoryTransaction {
-  id          String        @id @default(cuid())
-  itemId      String
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  itemId String @db.ObjectId
   item        InventoryItem @relation(fields: [itemId], references: [id])
   type        String        // PURCHASE | SALE
   quantity    Int
@@ -206,8 +206,8 @@ model InventoryTransaction {
 }
 
 model Document {
-  id          String   @id @default(cuid())
-  customerId  String
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  customerId String @db.ObjectId
   customer    Customer @relation(fields: [customerId], references: [id])
   name        String
   url         String
@@ -219,12 +219,12 @@ model Document {
 }
 
 model ActivityLog {
-  id          String   @id @default(cuid())
-  userId      String
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
   user        User     @relation(fields: [userId], references: [id])
   action      String
   entity      String?
-  entityId    String?
+  entityId String? @db.ObjectId
   details     String?
   createdAt   DateTime @default(now())
 
@@ -234,14 +234,14 @@ model ActivityLog {
 }
 
 model ShopSettings {
-  id          String   @id @default(cuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   key         String   @unique
   value       String
   updatedAt   DateTime @updatedAt
 }
 
 model Expense {
-  id          String   @id @default(cuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   category    String
   amount      Float
   description String?
@@ -254,7 +254,7 @@ model Expense {
 }
 
 model Income {
-  id          String   @id @default(cuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   category    String
   amount      Float
   description String?
@@ -267,7 +267,7 @@ model Income {
 }
 
 model Vendor {
-  id          String   @id @default(cuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   phone       String?
   company     String?
@@ -278,8 +278,8 @@ model Vendor {
 }
 
 model VendorTransaction {
-  id          String   @id @default(cuid())
-  vendorId    String
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  vendorId String @db.ObjectId
   vendor      Vendor   @relation(fields: [vendorId], references: [id])
   type        String   // PURCHASE (Adds to Udhaar/Balance) | PAYMENT (Reduces Balance)
   amount      Float
@@ -293,7 +293,7 @@ model VendorTransaction {
 }
 
 model OnlineServiceCategory {
-  id          String              @id @default(cuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   title       String
   description String?
   tag         String?
@@ -307,8 +307,8 @@ model OnlineServiceCategory {
 }
 
 model OnlineServiceLink {
-  id          String                @id @default(cuid())
-  categoryId  String
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  categoryId String @db.ObjectId
   category    OnlineServiceCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   title       String
   href        String
