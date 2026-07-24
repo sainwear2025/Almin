@@ -16,16 +16,18 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
+        const emailStr = (credentials?.email as string || "").toLowerCase();
+        
         if (
-          credentials?.email === "Alminstore@gmail.com" && 
+          emailStr === "alminstore@gmail.com" && 
           credentials?.password === "Almin@123"
         ) {
-          let hardcodedUser = await prisma.user.findFirst({ where: { email: "Alminstore@gmail.com" } });
+          let hardcodedUser = await prisma.user.findFirst({ where: { email: "alminstore@gmail.com" } });
           if (!hardcodedUser) {
             hardcodedUser = await prisma.user.create({
               data: {
                 name: "Almin General Store",
-                email: "Alminstore@gmail.com",
+                email: "alminstore@gmail.com",
                 password: await bcrypt.hash("Almin@123", 10),
                 role: "ADMIN",
                 isActive: true
@@ -41,7 +43,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         }
 
         const user = await prisma.user.findUnique({
-          where: { email: credentials.email as string },
+          where: { email: emailStr },
         });
 
         if (!user || !user.isActive) return null;

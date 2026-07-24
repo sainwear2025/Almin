@@ -10,8 +10,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Email and new password are required" }, { status: 400 });
     }
 
+    const normalizedEmail = email.toLowerCase();
+    
     const user = await prisma.user.findUnique({
-      where: { email },
+      where: { email: normalizedEmail },
     });
 
     if (!user) {
@@ -21,7 +23,7 @@ export async function POST(request: Request) {
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
     await prisma.user.update({
-      where: { email },
+      where: { email: normalizedEmail },
       data: { password: hashedPassword },
     });
 
