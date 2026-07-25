@@ -4,10 +4,11 @@ import { useState, useRef } from "react";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { generateRationCardPDF } from "@/lib/pdf/generateRationCard";
-import { Download, Eye, FileText, Plus, Trash2, Upload } from "lucide-react";
 import { ReactTransliterate } from "react-transliterate";
 import "react-transliterate/dist/index.css";
+import { Download, Eye, FileText, Plus, Trash2, Upload } from "lucide-react";
+import { biharRationKhaConfig } from "@/config/forms/bihar-ration-kha";
+import { FormEngineRenderer } from "@/components/form-engine/FormEngineRenderer";
 
 // Form Schema
 const formSchema = z.object({
@@ -116,8 +117,31 @@ export default function RationCardFormPage() {
   const onSubmit = async (data: FormValues) => {
     setIsGenerating(true);
     try {
-      const url = await generateRationCardPDF(data);
-      setPdfUrl(url);
+      const container = document.getElementById('form-engine-container');
+      if (!container) throw new Error("Preview container not found");
+      
+      const html = container.innerHTML;
+
+      const res = await fetch('/api/generate-form-pdf', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ html })
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to generate PDF from server");
+      }
+
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      
+      // Auto-trigger download
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Ration_Card_Form_Bihar.pdf';
+      a.click();
+
+      setPdfUrl(url); // Also store it
     } catch (error) {
       console.error("Error generating PDF:", error);
       alert("Failed to generate PDF. Check console for details.");
@@ -141,11 +165,11 @@ export default function RationCardFormPage() {
         {pdfUrl && (
           <a
             href={pdfUrl}
-            download="Ration_Card_Form.pdf"
+            download="Ration_Card_Form_Bihar.pdf"
             className="btn-primary flex items-center gap-2"
           >
             <Download size={16} />
-            Download PDF
+            Download Generated PDF
           </a>
         )}
       </div>
@@ -419,20 +443,18 @@ export default function RationCardFormPage() {
           </form>
         </div>
 
-        {/* RIGHT: PDF PREVIEW */}
+        {/* RIGHT: LIVE PDF PREVIEW */}
         <div className="glass-card p-4 rounded-2xl h-[800px] flex flex-col bg-gray-100 dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800">
           <h2 className="text-sm font-bold mb-3 flex items-center gap-2 text-gray-700 dark:text-gray-300">
-             Live Preview
+             Live Preview (Exact Layout)
           </h2>
-          <div className="flex-1 bg-white rounded-xl overflow-hidden shadow-inner">
-            {pdfUrl ? (
-              <iframe src={pdfUrl} className="w-full h-full border-0" title="PDF Preview" />
-            ) : (
-              <div className="flex flex-col items-center justify-center h-full text-gray-400 text-center px-6">
-                <FileText size={48} className="mb-4 opacity-50" />
-                <p>Fill the details on the left and click <b>Preview</b> to generate the 3-page Ration Card PDF.</p>
-              </div>
-            )}
+          <div className="flex-1 bg-gray-300 rounded-xl overflow-y-auto overflow-x-hidden shadow-inner flex justify-center py-4">
+            {/* We scale the A4 page container so it fits in the right panel visually, but the raw HTML remains A4 size for Puppeteer */}
+            <div style={{ transform: 'scale(0.65)', transformOrigin: 'top center', height: 'fit-content' }}>
+               <div id="form-engine-container">
+                 <FormEngineRenderer config={biharRationKhaConfig} data={watch()} />
+               </div>
+            </div>
           </div>
         </div>
       </div>
