@@ -41,78 +41,48 @@ export async function generateRationCardPDF(data: RationCardFormData): Promise<s
   
   const pages = pdfDoc.getPages();
   const page1 = pages[0];
-  const page3 = pages.length > 2 ? pages[2] : pages[0]; // Signature page
+  const page2 = pages.length > 1 ? pages[1] : pages[0];
+  const page3 = pages.length > 2 ? pages[2] : pages[0];
 
   const fontSize = 11;
-  const color = rgb(0, 0, 0); // Black
+  const color = rgb(0.1, 0.1, 0.1);
 
-  // Approximate Coordinates (X, Y) from bottom-left
-  // These will need to be fine-tuned to match the exact physical form
+  // --- PAGE 1: BASIC DETAILS ---
+  // Coordinates are from bottom-left (0,0)
   
-  // 1. Aavedak ka naam
-  page1.drawText(data.applicantName || '', { x: 200, y: 685, size: fontSize, font: customFont, color });
+  page1.drawText(data.applicantName || '', { x: 200, y: 605, size: fontSize, font: customFont, color });
+  page1.drawText(data.aadhaar || '', { x: 200, y: 575, size: fontSize, font: customFont, color });
+  page1.drawText(data.mobile || '', { x: 200, y: 545, size: fontSize, font: customFont, color });
+  page1.drawText(data.fatherName || '', { x: 230, y: 515, size: fontSize, font: customFont, color });
+  page1.drawText(data.address || '', { x: 200, y: 485, size: fontSize, font: customFont, color });
+  page1.drawText(data.existingRationCard || '', { x: 240, y: 455, size: fontSize, font: customFont, color });
+  page1.drawText(data.dealerName || '', { x: 360, y: 425, size: fontSize, font: customFont, color });
   
-  // 2. Aadhaar / EID no
-  page1.drawText(data.aadhaar || '', { x: 200, y: 655, size: fontSize, font: customFont, color });
-  
-  // 3. Mobile No
-  page1.drawText(data.mobile || '', { x: 200, y: 625, size: fontSize, font: customFont, color });
-  
-  // 4. Pati / pita ka naam
-  page1.drawText(data.fatherName || '', { x: 250, y: 595, size: fontSize, font: customFont, color });
-  
-  // 5. Purn aawasiya pata (Might need text wrapping logic if it's too long)
-  page1.drawText(data.address || '', { x: 200, y: 565, size: fontSize, font: customFont, color });
-  
-  // 6. Vidyamaan ration card ki sankhya
-  page1.drawText(data.existingRationCard || '', { x: 250, y: 535, size: fontSize, font: customFont, color });
-  
-  // 7. Jan vitaran pranali vikreta
-  page1.drawText(data.dealerName || '', { x: 350, y: 505, size: fontSize, font: customFont, color });
-  
-  // 8. Reason for change checkboxes (Simulating ticks by drawing '✓' or filled box)
+  // Checkboxes for reason
+  const tick = '✓';
   if (data.reasonForChange === 'Nivas') {
-    page1.drawText('✓', { x: 200, y: 470, size: 14, font: customFont, color });
+    page1.drawText(tick, { x: 180, y: 365, size: 14, font: customFont, color });
   } else if (data.reasonForChange === 'JanmMrityu') {
-    page1.drawText('✓', { x: 200, y: 445, size: 14, font: customFont, color });
+    page1.drawText(tick, { x: 180, y: 335, size: 14, font: customFont, color });
   } else if (data.reasonForChange === 'Ashuddhiya') {
-    page1.drawText('✓', { x: 250, y: 420, size: 14, font: customFont, color });
+    page1.drawText(tick, { x: 230, y: 305, size: 14, font: customFont, color });
   } else if (data.reasonForChange === 'Anya') {
-    page1.drawText('✓', { x: 150, y: 395, size: 14, font: customFont, color });
+    page1.drawText(tick, { x: 150, y: 275, size: 14, font: customFont, color });
   }
 
-  // 9. Family Members Table
-  let tableStartY = 310; // Adjust based on template table location
-  const rowHeight = 25;
-  data.familyMembers.forEach((member, index) => {
-    if (index > 4) return; // Limit to prevent overflow, depending on template space
-    const y = tableStartY - (index * rowHeight);
-    page1.drawText(String(index + 1), { x: 70, y, size: 10, font: customFont, color });
-    page1.drawText(member.name || '', { x: 100, y, size: 10, font: customFont, color });
-    page1.drawText(member.fatherName || '', { x: 220, y, size: 10, font: customFont, color });
-    page1.drawText(member.gender || '', { x: 350, y, size: 10, font: customFont, color });
-    page1.drawText(member.age || '', { x: 400, y, size: 10, font: customFont, color });
-    page1.drawText(member.maritalStatus || '', { x: 440, y, size: 10, font: customFont, color });
-    page1.drawText(member.relation || '', { x: 500, y, size: 10, font: customFont, color });
-  });
-
-  // Attach Photo
+  // Attach Photo on Page 1 (Top Right)
   if (data.photoBase64) {
     try {
       const base64Data = data.photoBase64.split(',')[1] || data.photoBase64;
       const imageBytes = Uint8Array.from(atob(base64Data), c => c.charCodeAt(0));
       
-      let image;
-      if (data.photoBase64.includes('image/png')) {
-        image = await pdfDoc.embedPng(imageBytes);
-      } else {
-        image = await pdfDoc.embedJpg(imageBytes);
-      }
+      let image = data.photoBase64.includes('image/png') 
+        ? await pdfDoc.embedPng(imageBytes) 
+        : await pdfDoc.embedJpg(imageBytes);
       
-      // Draw in photo box area (top right)
       page1.drawImage(image, {
-        x: 450,
-        y: 650,
+        x: 430,
+        y: 540,
         width: 100,
         height: 120,
       });
@@ -121,32 +91,59 @@ export async function generateRationCardPDF(data: RationCardFormData): Promise<s
     }
   }
 
-  // Attach Signature on Page 3 (or whatever page has the signature box)
+  // --- PAGE 1 & 2: FAMILY MEMBERS TABLE ---
+  const rowHeight = 22;
+  
+  data.familyMembers.forEach((member, index) => {
+    let currentPage;
+    let startY;
+    let localIndex;
+    
+    // First 3 members on Page 1, rest on Page 2
+    if (index < 3) {
+      currentPage = page1;
+      startY = 195;
+      localIndex = index;
+    } else {
+      currentPage = page2;
+      startY = 720; // Adjust for top of table on page 2
+      localIndex = index - 3;
+    }
+    
+    if (localIndex > 3 && currentPage === page2) return; // Max 4 on page 2
+
+    const y = startY - (localIndex * rowHeight);
+    currentPage.drawText(String(index + 1), { x: 75, y, size: 10, font: customFont, color });
+    currentPage.drawText(member.name || '', { x: 115, y, size: 10, font: customFont, color });
+    currentPage.drawText(member.fatherName || '', { x: 220, y, size: 10, font: customFont, color });
+    currentPage.drawText(member.gender || '', { x: 340, y, size: 10, font: customFont, color });
+    currentPage.drawText(member.age || '', { x: 395, y, size: 10, font: customFont, color });
+    currentPage.drawText(member.maritalStatus || '', { x: 445, y, size: 10, font: customFont, color });
+    currentPage.drawText(member.relation || '', { x: 510, y, size: 10, font: customFont, color });
+  });
+
+  // --- PAGE 3: SIGNATURE ---
   if (data.signatureBase64 && page3) {
     try {
       const base64Data = data.signatureBase64.split(',')[1] || data.signatureBase64;
       const imageBytes = Uint8Array.from(atob(base64Data), c => c.charCodeAt(0));
       
-      let image;
-      if (data.signatureBase64.includes('image/png')) {
-        image = await pdfDoc.embedPng(imageBytes);
-      } else {
-        image = await pdfDoc.embedJpg(imageBytes);
-      }
+      let image = data.signatureBase64.includes('image/png') 
+        ? await pdfDoc.embedPng(imageBytes) 
+        : await pdfDoc.embedJpg(imageBytes);
       
-      // Draw in signature area (bottom right on declaration page)
       page3.drawImage(image, {
-        x: 350,
-        y: 100,
-        width: 150,
-        height: 50,
+        x: 400,
+        y: 440,
+        width: 120,
+        height: 40,
       });
     } catch (e) {
       console.error("Error embedding signature", e);
     }
   }
 
-  // Serialize the PDFDocument to bytes (a Uint8Array)
+  // Serialize the PDFDocument to bytes
   const pdfBytes = await pdfDoc.save();
   
   // Create a Blob and return its URL

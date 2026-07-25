@@ -1,11 +1,13 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { generateRationCardPDF, RationCardFormData } from "@/lib/pdf/generateRationCard";
 import { Download, Eye, FileText, Plus, Trash2, Upload } from "lucide-react";
+import { ReactTransliterate } from "react-transliterate";
+import "react-transliterate/dist/index.css";
 
 // Form Schema
 const formSchema = z.object({
@@ -110,8 +112,20 @@ export default function RationCardFormPage() {
             {/* Base Details */}
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold mb-1">Applicant Name</label>
-                <input {...register("applicantName")} className="form-input w-full" placeholder="आवेदक का नाम" />
+                <label className="block text-xs font-bold mb-1">Applicant Name (Type in English)</label>
+                <Controller
+                  control={control}
+                  name="applicantName"
+                  render={({ field: { onChange, value } }) => (
+                    <ReactTransliterate
+                      value={value || ""}
+                      onChangeText={(text) => onChange(text)}
+                      lang="hi"
+                      className="form-input w-full"
+                      placeholder="आवेदक का नाम"
+                    />
+                  )}
+                />
                 {errors.applicantName && <p className="text-red-500 text-xs mt-1">{errors.applicantName.message}</p>}
               </div>
               <div>
@@ -123,20 +137,56 @@ export default function RationCardFormPage() {
                 <input {...register("mobile")} className="form-input w-full" placeholder="मोबाईल नं०" />
               </div>
               <div>
-                <label className="block text-xs font-bold mb-1">Father/Husband Name</label>
-                <input {...register("fatherName")} className="form-input w-full" placeholder="पति/पिता का नाम" />
+                <label className="block text-xs font-bold mb-1">Father/Husband Name (English)</label>
+                <Controller
+                  control={control}
+                  name="fatherName"
+                  render={({ field: { onChange, value } }) => (
+                    <ReactTransliterate
+                      value={value || ""}
+                      onChangeText={(text) => onChange(text)}
+                      lang="hi"
+                      className="form-input w-full"
+                      placeholder="पति/पिता का नाम"
+                    />
+                  )}
+                />
               </div>
               <div className="col-span-2">
-                <label className="block text-xs font-bold mb-1">Full Address</label>
-                <textarea {...register("address")} className="form-input w-full h-16" placeholder="पूर्ण आवासीय पता" />
+                <label className="block text-xs font-bold mb-1">Full Address (Type in English)</label>
+                <Controller
+                  control={control}
+                  name="address"
+                  render={({ field: { onChange, value } }) => (
+                    <ReactTransliterate
+                      renderComponent={(props) => <textarea {...props} className="form-input w-full h-16" />}
+                      value={value || ""}
+                      onChangeText={(text) => onChange(text)}
+                      lang="hi"
+                      placeholder="पूर्ण आवासीय पता"
+                    />
+                  )}
+                />
               </div>
               <div>
                 <label className="block text-xs font-bold mb-1">Existing Ration Card No.</label>
                 <input {...register("existingRationCard")} className="form-input w-full" placeholder="विद्यमान राशन कार्ड सं०" />
               </div>
               <div>
-                <label className="block text-xs font-bold mb-1">Dealer Name & License</label>
-                <input {...register("dealerName")} className="form-input w-full" placeholder="विक्रेता का नाम एवं अनुज्ञप्ति" />
+                <label className="block text-xs font-bold mb-1">Dealer Name (Type in English)</label>
+                <Controller
+                  control={control}
+                  name="dealerName"
+                  render={({ field: { onChange, value } }) => (
+                    <ReactTransliterate
+                      value={value || ""}
+                      onChangeText={(text) => onChange(text)}
+                      lang="hi"
+                      className="form-input w-full"
+                      placeholder="विक्रेता का नाम"
+                    />
+                  )}
+                />
               </div>
               <div className="col-span-2">
                 <label className="block text-xs font-bold mb-1">Reason for Change</label>
@@ -163,11 +213,33 @@ export default function RationCardFormPage() {
                   <div key={field.id} className="grid grid-cols-6 gap-2 items-end p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
                     <div className="col-span-2">
                       <label className="text-[10px] uppercase font-bold text-gray-500">Name</label>
-                      <input {...register(`familyMembers.${index}.name`)} className="form-input w-full text-xs" />
+                      <Controller
+                        control={control}
+                        name={`familyMembers.${index}.name`}
+                        render={({ field: { onChange, value } }) => (
+                          <ReactTransliterate
+                            value={value || ""}
+                            onChangeText={(text) => onChange(text)}
+                            lang="hi"
+                            className="form-input w-full text-xs"
+                          />
+                        )}
+                      />
                     </div>
                     <div className="col-span-2">
                       <label className="text-[10px] uppercase font-bold text-gray-500">Father Name</label>
-                      <input {...register(`familyMembers.${index}.fatherName`)} className="form-input w-full text-xs" />
+                      <Controller
+                        control={control}
+                        name={`familyMembers.${index}.fatherName`}
+                        render={({ field: { onChange, value } }) => (
+                          <ReactTransliterate
+                            value={value || ""}
+                            onChangeText={(text) => onChange(text)}
+                            lang="hi"
+                            className="form-input w-full text-xs"
+                          />
+                        )}
+                      />
                     </div>
                     <div>
                       <label className="text-[10px] uppercase font-bold text-gray-500">Age</label>
@@ -176,7 +248,18 @@ export default function RationCardFormPage() {
                     <div className="flex gap-2 items-center">
                        <div className="flex-1">
                          <label className="text-[10px] uppercase font-bold text-gray-500">Rel.</label>
-                         <input {...register(`familyMembers.${index}.relation`)} className="form-input w-full text-xs" />
+                         <Controller
+                            control={control}
+                            name={`familyMembers.${index}.relation`}
+                            render={({ field: { onChange, value } }) => (
+                              <ReactTransliterate
+                                value={value || ""}
+                                onChangeText={(text) => onChange(text)}
+                                lang="hi"
+                                className="form-input w-full text-xs"
+                              />
+                            )}
+                          />
                        </div>
                        <button type="button" onClick={() => remove(index)} className="text-red-500 p-2 hover:bg-red-100 rounded self-end mb-0.5">
                          <Trash2 size={14} />
