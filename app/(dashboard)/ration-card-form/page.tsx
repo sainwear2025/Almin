@@ -7,8 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ReactTransliterate } from "react-transliterate";
 import "react-transliterate/dist/index.css";
 import { Download, Eye, FileText, Plus, Trash2, Upload } from "lucide-react";
-import { biharRationKhaConfig } from "@/config/forms/bihar-ration-kha";
-import { FormEngineRenderer } from "@/components/form-engine/FormEngineRenderer";
+import { BiharRationKhaTemplate } from "@/components/templates/BiharRationKhaTemplate";
 
 // Form Schema
 const formSchema = z.object({
@@ -452,7 +451,7 @@ export default function RationCardFormPage() {
             {/* We scale the A4 page container so it fits in the right panel visually, but the raw HTML remains A4 size for Puppeteer */}
             <div style={{ transform: 'scale(0.65)', transformOrigin: 'top center', height: 'fit-content' }}>
                <div id="form-engine-container">
-                 <FormEngineRenderer config={biharRationKhaConfig} data={watch()} />
+                 <BiharRationKhaTemplate data={watch()} />
                </div>
             </div>
           </div>
