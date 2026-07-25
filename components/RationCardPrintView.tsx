@@ -1,4 +1,4 @@
-import { FormValues } from '@/app/(dashboard)/ration-card-form/page';
+import { FormValues } from '@/app/(dashboard)/manual-forms/ration-card/kha/page';
 
 interface Props {
   data: FormValues;

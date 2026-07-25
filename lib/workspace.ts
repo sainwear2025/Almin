@@ -138,9 +138,9 @@ export const WORKSPACE_MODULES: WorkspaceModule[] = [
     keywords: ["bihar", "rtps", "domicile", "residence", "passport", "voter", "pan", "aadhaar", "ration", "online"],
   },
   {
-    id: "ration-card-form",
+    id: "manual-forms",
     label: "Manual Form Filling",
-    href: "/ration-card-form",
+    href: "/manual-forms",
     icon: "FilePlus2",
     section: "Tools",
     keywords: ["ration", "bihar", "form", "pdf", "generate", "manual filling"],
