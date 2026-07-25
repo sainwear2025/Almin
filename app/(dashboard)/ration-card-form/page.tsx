@@ -173,10 +173,10 @@ export default function RationCardFormPage() {
         )}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* LEFT: FORM */}
-        <div className="glass-card p-6 rounded-2xl max-h-[800px] overflow-y-auto">
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <div className="glass-card p-6 rounded-2xl h-[800px] flex flex-col overflow-hidden bg-gray-100 dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800">
+          <form onSubmit={handleSubmit(onSubmit)} className="flex-1 overflow-y-auto pr-2 custom-scrollbar space-y-6">
             
             {/* Base Details */}
             <div className="grid grid-cols-2 gap-4">
