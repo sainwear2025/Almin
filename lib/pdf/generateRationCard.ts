@@ -150,6 +150,6 @@ export async function generateRationCardPDF(data: RationCardFormData): Promise<s
   const pdfBytes = await pdfDoc.save();
   
   // Create a Blob and return its URL
-  const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+  const blob = new Blob([pdfBytes as any], { type: 'application/pdf' });
   return URL.createObjectURL(blob);
 }
