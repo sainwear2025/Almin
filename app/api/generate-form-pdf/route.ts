@@ -19,7 +19,7 @@ export async function POST(req: Request) {
       args: chromium.args,
       defaultViewport: { width: 1920, height: 1080 },
       executablePath: executablePath || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', // fallback for local mac
-      headless: chromium.headless,
+      headless: true,
     });
 
     const page = await browser.newPage();
