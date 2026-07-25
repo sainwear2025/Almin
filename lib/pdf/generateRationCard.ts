@@ -1,6 +1,6 @@
 import { PDFDocument, rgb } from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit';
-import { FormValues } from '@/app/(dashboard)/ration-card-form/page';
+import { FormValues } from '@/app/(dashboard)/manual-forms/ration-card/kha/page';
 
 export async function generateRationCardPDF(data: FormValues): Promise<string> {
   // Fetch template and font
