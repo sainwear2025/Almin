@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { generateRationCardPDF, RationCardFormData } from "@/lib/pdf/generateRationCard";
+import { generateRationCardPDF } from "@/lib/pdf/generateRationCard";
 import { Download, Eye, FileText, Plus, Trash2, Upload } from "lucide-react";
 import { ReactTransliterate } from "react-transliterate";
 import "react-transliterate/dist/index.css";
