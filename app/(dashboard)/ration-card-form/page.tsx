@@ -333,20 +333,13 @@ export default function RationCardFormPage() {
               </div>
             </div>
 
-            {/* Area & Declarations */}
+            {/* Declarations */}
             <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
               <label className="block text-sm font-bold mb-3">Declarations</label>
               
               <div className="mb-4">
-                <label className="text-xs font-bold">Area Type: </label>
-                <select {...register("areaType")} className="form-input ml-2 text-xs w-48">
-                  <option value="Rural">Gramin (Rural)</option>
-                  <option value="Urban">Shahari (Urban)</option>
-                </select>
-              </div>
-
-              {areaType === "Rural" ? (
-                <div className="space-y-2">
+                <h4 className="text-xs font-bold text-gray-700 dark:text-gray-300 mb-2">(क) ग्रामीण क्षेत्र (Rural)</h4>
+                <div className="space-y-2 pl-2 border-l-2 border-blue-500">
                   <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("ruralDeclarations.motorVehicle")} /> Motor/3-4 wheeler</label>
                   <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("ruralDeclarations.machineEquip")} /> Machine agriculture eq.</label>
                   <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("ruralDeclarations.govtRegIndustry")} /> Govt reg. non-agri industry</label>
@@ -359,8 +352,11 @@ export default function RationCardFormPage() {
                   <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("ruralDeclarations.irrigatedLand7_5")} /> 7.5 acre irrigated land</label>
                   <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("ruralDeclarations.govtServant")} /> Govt Servant</label>
                 </div>
-              ) : (
-                <div className="space-y-2">
+              </div>
+
+              <div>
+                <h4 className="text-xs font-bold text-gray-700 dark:text-gray-300 mb-2">(ख) शहरी क्षेत्र (Urban)</h4>
+                <div className="space-y-2 pl-2 border-l-2 border-green-500">
                   <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("urbanDeclarations.incomeTax")} /> Pay Income Tax</label>
                   <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("urbanDeclarations.commercialTax")} /> Pay Commercial Tax</label>
                   <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("urbanDeclarations.puccaHouse3Rooms")} /> Pucca house with 3+ rooms</label>
@@ -370,7 +366,7 @@ export default function RationCardFormPage() {
                   <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("urbanDeclarations.washingMachine")} /> Washing Machine</label>
                   <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("urbanDeclarations.govtServant")} /> Govt Servant (excluding Group D)</label>
                 </div>
-              )}
+              </div>
             </div>
 
             {/* Date and Place */}

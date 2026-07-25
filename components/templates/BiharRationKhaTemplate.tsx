@@ -215,9 +215,9 @@ export function BiharRationKhaTemplate({ data }: Props) {
                   <span className="flex-1">(i) मोटर चालित तिपहिया/चार पहिया वाहन है,</span>
                   <div className="flex items-center">
                     <span>हाँ</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.areaType === 'Rural' && data.ruralDeclarations?.motorVehicle ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.ruralDeclarations?.motorVehicle ? tick : ''}</span>
                     <span>नहीं</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.areaType === 'Rural' && data.ruralDeclarations && !data.ruralDeclarations.motorVehicle ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.ruralDeclarations && !data.ruralDeclarations.motorVehicle ? tick : ''}</span>
                   </div>
                 </div>
                 
@@ -225,9 +225,9 @@ export function BiharRationKhaTemplate({ data }: Props) {
                   <span className="flex-1">(ii) मशीन चालित तीन/चार पहियों वाले कृषि उपकरण है,</span>
                   <div className="flex items-center">
                     <span>हाँ</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.areaType === 'Rural' && data.ruralDeclarations?.machineEquip ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.ruralDeclarations?.machineEquip ? tick : ''}</span>
                     <span>नहीं</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.areaType === 'Rural' && data.ruralDeclarations && !data.ruralDeclarations.machineEquip ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.ruralDeclarations && !data.ruralDeclarations.machineEquip ? tick : ''}</span>
                   </div>
                 </div>
 
@@ -235,9 +235,9 @@ export function BiharRationKhaTemplate({ data }: Props) {
                   <span className="flex-1">(iii) सरकार में पंजीकृत गैर-कृषि उद्योग वाले परिवार वाली गृहस्थी है,</span>
                   <div className="flex items-center">
                     <span>हाँ</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.areaType === 'Rural' && data.ruralDeclarations?.govtRegIndustry ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.ruralDeclarations?.govtRegIndustry ? tick : ''}</span>
                     <span>नहीं</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.areaType === 'Rural' && data.ruralDeclarations && !data.ruralDeclarations.govtRegIndustry ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.ruralDeclarations && !data.ruralDeclarations.govtRegIndustry ? tick : ''}</span>
                   </div>
                 </div>
 
@@ -245,9 +245,9 @@ export function BiharRationKhaTemplate({ data }: Props) {
                   <span className="flex-1">(iv) परिवार के किसी सदस्य की मासिक आय 10,000/- रू0 से अधिक है,</span>
                   <div className="flex items-center">
                     <span>हाँ</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.areaType === 'Rural' && data.ruralDeclarations?.incomeOver10k ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.ruralDeclarations?.incomeOver10k ? tick : ''}</span>
                     <span>नहीं</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.areaType === 'Rural' && data.ruralDeclarations && !data.ruralDeclarations.incomeOver10k ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.ruralDeclarations && !data.ruralDeclarations.incomeOver10k ? tick : ''}</span>
                   </div>
                 </div>
 
@@ -255,9 +255,9 @@ export function BiharRationKhaTemplate({ data }: Props) {
                   <span className="flex-1">(v) आयकर देते है,</span>
                   <div className="flex items-center">
                     <span>हाँ</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.areaType === 'Rural' && data.ruralDeclarations?.incomeTax ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.ruralDeclarations?.incomeTax ? tick : ''}</span>
                     <span>नहीं</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.areaType === 'Rural' && data.ruralDeclarations && !data.ruralDeclarations.incomeTax ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.ruralDeclarations && !data.ruralDeclarations.incomeTax ? tick : ''}</span>
                   </div>
                 </div>
 
@@ -265,9 +265,9 @@ export function BiharRationKhaTemplate({ data }: Props) {
                   <span className="flex-1">(vi) व्यावसायिक कर का भुगतान करते है,</span>
                   <div className="flex items-center">
                     <span>हाँ</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.areaType === 'Rural' && data.ruralDeclarations?.commercialTax ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.ruralDeclarations?.commercialTax ? tick : ''}</span>
                     <span>नहीं</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.areaType === 'Rural' && data.ruralDeclarations && !data.ruralDeclarations.commercialTax ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.ruralDeclarations && !data.ruralDeclarations.commercialTax ? tick : ''}</span>
                   </div>
                 </div>
 
@@ -275,9 +275,9 @@ export function BiharRationKhaTemplate({ data }: Props) {
                   <span className="flex-1">(vii) जिस मकान में रहते है, उस मकान में सभी कमरों में पक्की दीवारों और छत के साथ तीन अथवा अधिक कमरा है,</span>
                   <div className="flex items-center">
                     <span>हाँ</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.areaType === 'Rural' && data.ruralDeclarations?.puccaHouse3Rooms ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.ruralDeclarations?.puccaHouse3Rooms ? tick : ''}</span>
                     <span>नहीं</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.areaType === 'Rural' && data.ruralDeclarations && !data.ruralDeclarations.puccaHouse3Rooms ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.ruralDeclarations && !data.ruralDeclarations.puccaHouse3Rooms ? tick : ''}</span>
                   </div>
                 </div>
 
@@ -285,9 +285,9 @@ export function BiharRationKhaTemplate({ data }: Props) {
                   <span className="flex-1">(viii) परिवार में कम से कम एक सिंचाई उपकरण के साथ 2.5 एकड़ अथवा इससे अधिक सिंचित भूमि है,</span>
                   <div className="flex items-center">
                     <span>हाँ</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.areaType === 'Rural' && data.ruralDeclarations?.irrigatedLand2_5 ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.ruralDeclarations?.irrigatedLand2_5 ? tick : ''}</span>
                     <span>नहीं</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.areaType === 'Rural' && data.ruralDeclarations && !data.ruralDeclarations.irrigatedLand2_5 ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.ruralDeclarations && !data.ruralDeclarations.irrigatedLand2_5 ? tick : ''}</span>
                   </div>
                 </div>
 
@@ -295,9 +295,9 @@ export function BiharRationKhaTemplate({ data }: Props) {
                   <span className="flex-1">(ix) दो अथवा उससे अधिक फसली मौसम के लिए 5 एकड़ अथवा इससे अधिक सिंचित भूमि वाली गृहस्थी है,</span>
                   <div className="flex items-center">
                     <span>हाँ</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.areaType === 'Rural' && data.ruralDeclarations?.irrigatedLand5 ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.ruralDeclarations?.irrigatedLand5 ? tick : ''}</span>
                     <span>नहीं</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.areaType === 'Rural' && data.ruralDeclarations && !data.ruralDeclarations.irrigatedLand5 ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.ruralDeclarations && !data.ruralDeclarations.irrigatedLand5 ? tick : ''}</span>
                   </div>
                 </div>
 
@@ -305,9 +305,9 @@ export function BiharRationKhaTemplate({ data }: Props) {
                   <span className="flex-1">(x) कम से कम एक सिंचाई उपकरण के साथ कम से कम 7.5 एकड़ अथवा इससे अधिक भूमि वाली गृहस्थी है,</span>
                   <div className="flex items-center">
                     <span>हाँ</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.areaType === 'Rural' && data.ruralDeclarations?.irrigatedLand7_5 ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.ruralDeclarations?.irrigatedLand7_5 ? tick : ''}</span>
                     <span>नहीं</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.areaType === 'Rural' && data.ruralDeclarations && !data.ruralDeclarations.irrigatedLand7_5 ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.ruralDeclarations && !data.ruralDeclarations.irrigatedLand7_5 ? tick : ''}</span>
                   </div>
                 </div>
 
@@ -316,16 +316,16 @@ export function BiharRationKhaTemplate({ data }: Props) {
                      <span className="flex-1">(xi) आवेदक अथवा आवेदक के परिवार का कोई सदस्य सरकारी सेवा में है,</span>
                      <div className="flex items-center">
                         <span>हाँ</span>
-                        <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.areaType === 'Rural' && data.ruralDeclarations?.govtServant ? tick : ''}</span>
+                        <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.ruralDeclarations?.govtServant ? tick : ''}</span>
                         <span>नहीं</span>
-                        <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.areaType === 'Rural' && data.ruralDeclarations && !data.ruralDeclarations.govtServant ? tick : ''}</span>
+                        <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.ruralDeclarations && !data.ruralDeclarations.govtServant ? tick : ''}</span>
                      </div>
                   </div>
                   <div className="ml-8 mt-2 space-y-1">
                      <p>अगर है तो उसका विवरण -</p>
-                     <p>(क) किस सेवा में है - <span className="font-semibold underline decoration-dotted underline-offset-4 px-2">{data.areaType === 'Rural' ? data.ruralDeclarations?.govtServantDetails?.serviceName : ''}</span></p>
-                     <p>(ख) कहाँ पदस्थापित है - <span className="font-semibold underline decoration-dotted underline-offset-4 px-2">{data.areaType === 'Rural' ? data.ruralDeclarations?.govtServantDetails?.postingPlace : ''}</span></p>
-                     <p>(ग) कितना मासिक आमदनी है - <span className="font-semibold underline decoration-dotted underline-offset-4 px-2">{data.areaType === 'Rural' ? data.ruralDeclarations?.govtServantDetails?.monthlyIncome : ''}</span></p>
+                     <p>(क) किस सेवा में है - <span className="font-semibold underline decoration-dotted underline-offset-4 px-2">{data.ruralDeclarations?.govtServantDetails?.serviceName || ''}</span></p>
+                     <p>(ख) कहाँ पदस्थापित है - <span className="font-semibold underline decoration-dotted underline-offset-4 px-2">{data.ruralDeclarations?.govtServantDetails?.postingPlace || ''}</span></p>
+                     <p>(ग) कितना मासिक आमदनी है - <span className="font-semibold underline decoration-dotted underline-offset-4 px-2">{data.ruralDeclarations?.govtServantDetails?.monthlyIncome || ''}</span></p>
                   </div>
                 </div>
               </div>
@@ -346,9 +346,9 @@ export function BiharRationKhaTemplate({ data }: Props) {
                   <span className="flex-1">(i) आयकर अदा करते है,</span>
                   <div className="flex items-center">
                     <span>हाँ</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.areaType === 'Urban' && data.urbanDeclarations?.incomeTax ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.urbanDeclarations?.incomeTax ? tick : ''}</span>
                     <span>नहीं</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.areaType === 'Urban' && data.urbanDeclarations && !data.urbanDeclarations.incomeTax ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.urbanDeclarations && !data.urbanDeclarations.incomeTax ? tick : ''}</span>
                   </div>
                 </div>
 
@@ -357,16 +357,16 @@ export function BiharRationKhaTemplate({ data }: Props) {
                      <span className="flex-1 w-4/5 leading-snug">(ii) आवेदक अथवा आवेदक के परिवार का कोई सदस्य वर्ग 1, वर्ग 2, वर्ग 3 एवं वर्ग 4 श्रेणी के सरकारी सेवा (अनु०जाति/अनु० जनजाति के Group 'D' के कर्मी को छोड़कर) में है,</span>
                      <div className="flex items-center">
                         <span>हाँ</span>
-                        <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.areaType === 'Urban' && data.urbanDeclarations?.govtServant ? tick : ''}</span>
+                        <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.urbanDeclarations?.govtServant ? tick : ''}</span>
                         <span>नहीं</span>
-                        <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.areaType === 'Urban' && data.urbanDeclarations && !data.urbanDeclarations.govtServant ? tick : ''}</span>
+                        <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.urbanDeclarations && !data.urbanDeclarations.govtServant ? tick : ''}</span>
                      </div>
                   </div>
                   <div className="ml-8 mt-2 space-y-1">
                      <p>अगर हाँ तो उसका विवरण -</p>
-                     <p>(क) किस सेवा में है - <span className="font-semibold underline decoration-dotted underline-offset-4 px-2">{data.areaType === 'Urban' ? data.urbanDeclarations?.govtServantDetails?.serviceName : ''}</span></p>
-                     <p>(ख) कहाँ पदस्थापित है - <span className="font-semibold underline decoration-dotted underline-offset-4 px-2">{data.areaType === 'Urban' ? data.urbanDeclarations?.govtServantDetails?.postingPlace : ''}</span></p>
-                     <p>(ग) कितनी मासिक आमदनी है - <span className="font-semibold underline decoration-dotted underline-offset-4 px-2">{data.areaType === 'Urban' ? data.urbanDeclarations?.govtServantDetails?.monthlyIncome : ''}</span></p>
+                     <p>(क) किस सेवा में है - <span className="font-semibold underline decoration-dotted underline-offset-4 px-2">{data.urbanDeclarations?.govtServantDetails?.serviceName || ''}</span></p>
+                     <p>(ख) कहाँ पदस्थापित है - <span className="font-semibold underline decoration-dotted underline-offset-4 px-2">{data.urbanDeclarations?.govtServantDetails?.postingPlace || ''}</span></p>
+                     <p>(ग) कितनी मासिक आमदनी है - <span className="font-semibold underline decoration-dotted underline-offset-4 px-2">{data.urbanDeclarations?.govtServantDetails?.monthlyIncome || ''}</span></p>
                   </div>
                 </div>
 
@@ -374,9 +374,9 @@ export function BiharRationKhaTemplate({ data }: Props) {
                   <span className="flex-1">(iii) व्यवसायिक कर अदा करते है,</span>
                   <div className="flex items-center">
                     <span>हाँ</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.areaType === 'Urban' && data.urbanDeclarations?.commercialTax ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.urbanDeclarations?.commercialTax ? tick : ''}</span>
                     <span>नहीं</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.areaType === 'Urban' && data.urbanDeclarations && !data.urbanDeclarations.commercialTax ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.urbanDeclarations && !data.urbanDeclarations.commercialTax ? tick : ''}</span>
                   </div>
                 </div>
 
@@ -384,9 +384,9 @@ export function BiharRationKhaTemplate({ data }: Props) {
                   <span className="flex-1">(iv) तीन कमरे या उससे अधिक (पक्का) कंक्रीट छतयुक्त मकान वाली गृहस्थी जो स्वयं की स्वामित्व में है,</span>
                   <div className="flex items-center">
                     <span>हाँ</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.areaType === 'Urban' && data.urbanDeclarations?.puccaHouse3Rooms ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.urbanDeclarations?.puccaHouse3Rooms ? tick : ''}</span>
                     <span>नहीं</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.areaType === 'Urban' && data.urbanDeclarations && !data.urbanDeclarations.puccaHouse3Rooms ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.urbanDeclarations && !data.urbanDeclarations.puccaHouse3Rooms ? tick : ''}</span>
                   </div>
                 </div>
 
@@ -394,9 +394,9 @@ export function BiharRationKhaTemplate({ data }: Props) {
                   <span className="flex-1">(v) परिवार के किसी सदस्य का मासिक आय 20,000/- रू0 से अधिक है,</span>
                   <div className="flex items-center">
                     <span>हाँ</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.areaType === 'Urban' && data.urbanDeclarations?.incomeOver20k ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.urbanDeclarations?.incomeOver20k ? tick : ''}</span>
                     <span>नहीं</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.areaType === 'Urban' && data.urbanDeclarations && !data.urbanDeclarations.incomeOver20k ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.urbanDeclarations && !data.urbanDeclarations.incomeOver20k ? tick : ''}</span>
                   </div>
                 </div>
 
@@ -404,9 +404,9 @@ export function BiharRationKhaTemplate({ data }: Props) {
                   <span className="flex-1">(vi) दो पहिया वाहन, रेफ्रीजरेटर तथा वाशिंग मशीन तीनों उपकरण है,</span>
                   <div className="flex items-center">
                     <span>हाँ</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.areaType === 'Urban' && data.urbanDeclarations?.threeAppliances ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.urbanDeclarations?.threeAppliances ? tick : ''}</span>
                     <span>नहीं</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.areaType === 'Urban' && data.urbanDeclarations && !data.urbanDeclarations.threeAppliances ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.urbanDeclarations && !data.urbanDeclarations.threeAppliances ? tick : ''}</span>
                   </div>
                 </div>
 
@@ -414,9 +414,9 @@ export function BiharRationKhaTemplate({ data }: Props) {
                   <span className="flex-1">(vii) गृहस्थी में चार पहिया वाहन है,</span>
                   <div className="flex items-center">
                     <span>हाँ</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.areaType === 'Urban' && data.urbanDeclarations?.fourWheeler ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.urbanDeclarations?.fourWheeler ? tick : ''}</span>
                     <span>नहीं</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.areaType === 'Urban' && data.urbanDeclarations && !data.urbanDeclarations.fourWheeler ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.urbanDeclarations && !data.urbanDeclarations.fourWheeler ? tick : ''}</span>
                   </div>
                 </div>
 
@@ -424,9 +424,9 @@ export function BiharRationKhaTemplate({ data }: Props) {
                   <span className="flex-1">(viii) गृहस्थी में वाशिंग मशीन है,</span>
                   <div className="flex items-center">
                     <span>हाँ</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.areaType === 'Urban' && data.urbanDeclarations?.washingMachine ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center mx-2 text-xs">{data.urbanDeclarations?.washingMachine ? tick : ''}</span>
                     <span>नहीं</span>
-                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.areaType === 'Urban' && data.urbanDeclarations && !data.urbanDeclarations.washingMachine ? tick : ''}</span>
+                    <span className="w-5 h-4 border border-black inline-flex items-center justify-center ml-2 text-xs">{data.urbanDeclarations && !data.urbanDeclarations.washingMachine ? tick : ''}</span>
                   </div>
                 </div>
              </div>
