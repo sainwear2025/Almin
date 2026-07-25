@@ -61,7 +61,7 @@ export async function POST(req: Request) {
 
     await browser.close();
 
-    return new NextResponse(pdfBuffer, {
+    return new NextResponse(Buffer.from(pdfBuffer), {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',
