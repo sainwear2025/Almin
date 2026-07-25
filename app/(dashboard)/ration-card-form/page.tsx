@@ -84,10 +84,10 @@ export default function RationCardFormPage() {
         <div>
           <h1 className="text-2xl font-bold flex items-center gap-2" style={{ color: "var(--text-primary)" }}>
             <FileText size={24} className="text-blue-600" />
-            Bihar Ration Card Form (Kha)
+            Manual Form Filling
           </h1>
-          <p className="text-sm mt-1" style={{ color: "var(--text-muted)" }}>
-            Fill the form dynamically to generate the exact PDF template.
+          <p className="text-sm mt-1 font-semibold" style={{ color: "var(--brand-primary)" }}>
+            Bihar Ration Card Form (Kha)
           </p>
         </div>
         {pdfUrl && (

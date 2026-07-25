@@ -139,11 +139,11 @@ export const WORKSPACE_MODULES: WorkspaceModule[] = [
   },
   {
     id: "ration-card-form",
-    label: "Ration Form",
+    label: "Manual Form Filling",
     href: "/ration-card-form",
     icon: "FilePlus2",
     section: "Tools",
-    keywords: ["ration", "bihar", "form", "pdf", "generate"],
+    keywords: ["ration", "bihar", "form", "pdf", "generate", "manual filling"],
   },
   {
     id: "counter-desk",
