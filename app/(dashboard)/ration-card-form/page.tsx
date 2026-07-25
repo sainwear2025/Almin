@@ -27,13 +27,54 @@ const formSchema = z.object({
       age: z.string().min(1, "Required"),
       maritalStatus: z.string().min(1, "Required"),
       relation: z.string().min(1, "Required"),
+      aadhaar: z.string().optional(),
+      mobile: z.string().optional(),
+      occupation: z.string().optional(),
+      incomeSource: z.string().optional(),
+      monthlyIncome: z.string().optional(),
     })
   ),
+  areaType: z.enum(["Rural", "Urban"]),
+  ruralDeclarations: z.object({
+    motorVehicle: z.boolean().optional(),
+    machineEquip: z.boolean().optional(),
+    govtRegIndustry: z.boolean().optional(),
+    incomeOver10k: z.boolean().optional(),
+    incomeTax: z.boolean().optional(),
+    commercialTax: z.boolean().optional(),
+    puccaHouse3Rooms: z.boolean().optional(),
+    irrigatedLand2_5: z.boolean().optional(),
+    irrigatedLand5: z.boolean().optional(),
+    irrigatedLand7_5: z.boolean().optional(),
+    govtServant: z.boolean().optional(),
+    govtServantDetails: z.object({
+      serviceName: z.string().optional(),
+      postingPlace: z.string().optional(),
+      monthlyIncome: z.string().optional(),
+    }).optional(),
+  }).optional(),
+  urbanDeclarations: z.object({
+    incomeTax: z.boolean().optional(),
+    govtServant: z.boolean().optional(),
+    govtServantDetails: z.object({
+      serviceName: z.string().optional(),
+      postingPlace: z.string().optional(),
+      monthlyIncome: z.string().optional(),
+    }).optional(),
+    commercialTax: z.boolean().optional(),
+    puccaHouse3Rooms: z.boolean().optional(),
+    incomeOver20k: z.boolean().optional(),
+    threeAppliances: z.boolean().optional(),
+    fourWheeler: z.boolean().optional(),
+    washingMachine: z.boolean().optional(),
+  }).optional(),
+  date: z.string().optional(),
+  place: z.string().optional(),
   photoBase64: z.string().optional(),
   signatureBase64: z.string().optional(),
 });
 
-type FormValues = z.infer<typeof formSchema>;
+export type FormValues = z.infer<typeof formSchema>;
 
 export default function RationCardFormPage() {
   const [pdfUrl, setPdfUrl] = useState<string | null>(null);
@@ -44,7 +85,10 @@ export default function RationCardFormPage() {
   const { register, control, handleSubmit, setValue, watch, formState: { errors } } = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      familyMembers: [{ name: "", fatherName: "", gender: "", age: "", maritalStatus: "", relation: "" }],
+      familyMembers: [{ name: "", fatherName: "", gender: "", age: "", maritalStatus: "", relation: "", aadhaar: "", mobile: "", occupation: "", incomeSource: "", monthlyIncome: "" }],
+      areaType: "Rural",
+      ruralDeclarations: {},
+      urbanDeclarations: {},
     },
   });
 
@@ -52,6 +96,8 @@ export default function RationCardFormPage() {
     control,
     name: "familyMembers",
   });
+
+  const areaType = watch("areaType");
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>, fieldName: "photoBase64" | "signatureBase64") => {
     const file = e.target.files?.[0];
@@ -89,7 +135,7 @@ export default function RationCardFormPage() {
             Manual Form Filling
           </h1>
           <p className="text-sm mt-1 font-semibold" style={{ color: "var(--brand-primary)" }}>
-            Bihar Ration Card Form (Kha)
+            Bihar Ration Card Form (Kha) - Full 3 Pages
           </p>
         </div>
         {pdfUrl && (
@@ -106,13 +152,13 @@ export default function RationCardFormPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         {/* LEFT: FORM */}
-        <div className="glass-card p-6 rounded-2xl">
+        <div className="glass-card p-6 rounded-2xl max-h-[800px] overflow-y-auto">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             
             {/* Base Details */}
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold mb-1">Applicant Name (Type in English)</label>
+                <label className="block text-xs font-bold mb-1">Applicant Name</label>
                 <Controller
                   control={control}
                   name="applicantName"
@@ -137,7 +183,7 @@ export default function RationCardFormPage() {
                 <input {...register("mobile")} className="form-input w-full" placeholder="मोबाईल नं०" />
               </div>
               <div>
-                <label className="block text-xs font-bold mb-1">Father/Husband Name (English)</label>
+                <label className="block text-xs font-bold mb-1">Father/Husband Name</label>
                 <Controller
                   control={control}
                   name="fatherName"
@@ -153,7 +199,7 @@ export default function RationCardFormPage() {
                 />
               </div>
               <div className="col-span-2">
-                <label className="block text-xs font-bold mb-1">Full Address (Type in English)</label>
+                <label className="block text-xs font-bold mb-1">Full Address</label>
                 <Controller
                   control={control}
                   name="address"
@@ -173,7 +219,7 @@ export default function RationCardFormPage() {
                 <input {...register("existingRationCard")} className="form-input w-full" placeholder="विद्यमान राशन कार्ड सं०" />
               </div>
               <div>
-                <label className="block text-xs font-bold mb-1">Dealer Name (Type in English)</label>
+                <label className="block text-xs font-bold mb-1">Dealer Name</label>
                 <Controller
                   control={control}
                   name="dealerName"
@@ -204,70 +250,128 @@ export default function RationCardFormPage() {
             <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
               <div className="flex items-center justify-between mb-3">
                 <label className="block text-sm font-bold">Family Details</label>
-                <button type="button" onClick={() => append({ name: "", fatherName: "", gender: "", age: "", maritalStatus: "", relation: "" })} className="text-xs text-blue-600 font-bold flex items-center gap-1">
+                <button type="button" onClick={() => append({ name: "", fatherName: "", gender: "", age: "", maritalStatus: "", relation: "", aadhaar: "", mobile: "", occupation: "", incomeSource: "", monthlyIncome: "" })} className="text-xs text-blue-600 font-bold flex items-center gap-1">
                   <Plus size={14} /> Add Member
                 </button>
               </div>
-              <div className="space-y-4">
+              <div className="space-y-6">
                 {fields.map((field, index) => (
-                  <div key={field.id} className="grid grid-cols-6 gap-2 items-end p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                    <div className="col-span-2">
+                  <div key={field.id} className="grid grid-cols-6 gap-2 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                    <div className="col-span-6 flex justify-between">
+                      <span className="text-xs font-bold">Member {index + 1}</span>
+                      <button type="button" onClick={() => remove(index)} className="text-red-500 text-xs flex items-center gap-1"><Trash2 size={12}/> Remove</button>
+                    </div>
+                    <div className="col-span-3">
                       <label className="text-[10px] uppercase font-bold text-gray-500">Name</label>
-                      <Controller
-                        control={control}
-                        name={`familyMembers.${index}.name`}
-                        render={({ field: { onChange, value } }) => (
-                          <ReactTransliterate
-                            value={value || ""}
-                            onChangeText={(text) => onChange(text)}
-                            lang="hi"
-                            className="form-input w-full text-xs"
-                          />
-                        )}
-                      />
+                      <Controller control={control} name={`familyMembers.${index}.name`} render={({ field: { onChange, value } }) => ( <ReactTransliterate value={value || ""} onChangeText={onChange} lang="hi" className="form-input w-full text-xs" /> )} />
+                    </div>
+                    <div className="col-span-3">
+                      <label className="text-[10px] uppercase font-bold text-gray-500">Father Name</label>
+                      <Controller control={control} name={`familyMembers.${index}.fatherName`} render={({ field: { onChange, value } }) => ( <ReactTransliterate value={value || ""} onChangeText={onChange} lang="hi" className="form-input w-full text-xs" /> )} />
                     </div>
                     <div className="col-span-2">
-                      <label className="text-[10px] uppercase font-bold text-gray-500">Father Name</label>
-                      <Controller
-                        control={control}
-                        name={`familyMembers.${index}.fatherName`}
-                        render={({ field: { onChange, value } }) => (
-                          <ReactTransliterate
-                            value={value || ""}
-                            onChangeText={(text) => onChange(text)}
-                            lang="hi"
-                            className="form-input w-full text-xs"
-                          />
-                        )}
-                      />
+                      <label className="text-[10px] uppercase font-bold text-gray-500">Gender</label>
+                      <Controller control={control} name={`familyMembers.${index}.gender`} render={({ field: { onChange, value } }) => ( <ReactTransliterate value={value || ""} onChangeText={onChange} lang="hi" className="form-input w-full text-xs" /> )} />
                     </div>
-                    <div>
+                    <div className="col-span-2">
                       <label className="text-[10px] uppercase font-bold text-gray-500">Age</label>
                       <input {...register(`familyMembers.${index}.age`)} className="form-input w-full text-xs" />
                     </div>
-                    <div className="flex gap-2 items-center">
-                       <div className="flex-1">
-                         <label className="text-[10px] uppercase font-bold text-gray-500">Rel.</label>
-                         <Controller
-                            control={control}
-                            name={`familyMembers.${index}.relation`}
-                            render={({ field: { onChange, value } }) => (
-                              <ReactTransliterate
-                                value={value || ""}
-                                onChangeText={(text) => onChange(text)}
-                                lang="hi"
-                                className="form-input w-full text-xs"
-                              />
-                            )}
-                          />
-                       </div>
-                       <button type="button" onClick={() => remove(index)} className="text-red-500 p-2 hover:bg-red-100 rounded self-end mb-0.5">
-                         <Trash2 size={14} />
-                       </button>
+                    <div className="col-span-2">
+                      <label className="text-[10px] uppercase font-bold text-gray-500">Rel.</label>
+                      <Controller control={control} name={`familyMembers.${index}.relation`} render={({ field: { onChange, value } }) => ( <ReactTransliterate value={value || ""} onChangeText={onChange} lang="hi" className="form-input w-full text-xs" /> )} />
+                    </div>
+                    <div className="col-span-2">
+                      <label className="text-[10px] uppercase font-bold text-gray-500">Marital Status</label>
+                      <Controller control={control} name={`familyMembers.${index}.maritalStatus`} render={({ field: { onChange, value } }) => ( <ReactTransliterate value={value || ""} onChangeText={onChange} lang="hi" className="form-input w-full text-xs" /> )} />
+                    </div>
+                    <div className="col-span-2">
+                      <label className="text-[10px] uppercase font-bold text-gray-500">Aadhaar</label>
+                      <input {...register(`familyMembers.${index}.aadhaar`)} className="form-input w-full text-xs" />
+                    </div>
+                    <div className="col-span-2">
+                      <label className="text-[10px] uppercase font-bold text-gray-500">Mobile</label>
+                      <input {...register(`familyMembers.${index}.mobile`)} className="form-input w-full text-xs" />
+                    </div>
+                    <div className="col-span-2">
+                      <label className="text-[10px] uppercase font-bold text-gray-500">Occupation</label>
+                      <Controller control={control} name={`familyMembers.${index}.occupation`} render={({ field: { onChange, value } }) => ( <ReactTransliterate value={value || ""} onChangeText={onChange} lang="hi" className="form-input w-full text-xs" /> )} />
+                    </div>
+                    <div className="col-span-2">
+                      <label className="text-[10px] uppercase font-bold text-gray-500">Income Source</label>
+                      <Controller control={control} name={`familyMembers.${index}.incomeSource`} render={({ field: { onChange, value } }) => ( <ReactTransliterate value={value || ""} onChangeText={onChange} lang="hi" className="form-input w-full text-xs" /> )} />
+                    </div>
+                    <div className="col-span-2">
+                      <label className="text-[10px] uppercase font-bold text-gray-500">Monthly Inc.</label>
+                      <input {...register(`familyMembers.${index}.monthlyIncome`)} className="form-input w-full text-xs" />
                     </div>
                   </div>
                 ))}
               </div>
+            </div>
+
+            {/* Area & Declarations */}
+            <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+              <label className="block text-sm font-bold mb-3">Declarations</label>
+              
+              <div className="mb-4">
+                <label className="text-xs font-bold">Area Type: </label>
+                <select {...register("areaType")} className="form-input ml-2 text-xs w-48">
+                  <option value="Rural">Gramin (Rural)</option>
+                  <option value="Urban">Shahari (Urban)</option>
+                </select>
+              </div>
+
+              {areaType === "Rural" ? (
+                <div className="space-y-2">
+                  <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("ruralDeclarations.motorVehicle")} /> Motor/3-4 wheeler</label>
+                  <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("ruralDeclarations.machineEquip")} /> Machine agriculture eq.</label>
+                  <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("ruralDeclarations.govtRegIndustry")} /> Govt reg. non-agri industry</label>
+                  <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("ruralDeclarations.incomeOver10k")} /> Income over 10k/month</label>
+                  <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("ruralDeclarations.incomeTax")} /> Pay Income Tax</label>
+                  <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("ruralDeclarations.commercialTax")} /> Pay Commercial Tax</label>
+                  <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("ruralDeclarations.puccaHouse3Rooms")} /> Pucca house with 3+ rooms</label>
+                  <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("ruralDeclarations.irrigatedLand2_5")} /> 2.5 acre irrigated land</label>
+                  <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("ruralDeclarations.irrigatedLand5")} /> 5 acre irrigated land</label>
+                  <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("ruralDeclarations.irrigatedLand7_5")} /> 7.5 acre irrigated land</label>
+                  <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("ruralDeclarations.govtServant")} /> Govt Servant</label>
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("urbanDeclarations.incomeTax")} /> Pay Income Tax</label>
+                  <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("urbanDeclarations.commercialTax")} /> Pay Commercial Tax</label>
+                  <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("urbanDeclarations.puccaHouse3Rooms")} /> Pucca house with 3+ rooms</label>
+                  <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("urbanDeclarations.incomeOver20k")} /> Income over 20k/month</label>
+                  <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("urbanDeclarations.threeAppliances")} /> 2-wheeler, Fridge & Washing Mach.</label>
+                  <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("urbanDeclarations.fourWheeler")} /> 4-wheeler</label>
+                  <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("urbanDeclarations.washingMachine")} /> Washing Machine</label>
+                  <label className="flex items-center gap-2 text-xs"><input type="checkbox" {...register("urbanDeclarations.govtServant")} /> Govt Servant (excluding Group D)</label>
+                </div>
+              )}
+            </div>
+
+            {/* Date and Place */}
+            <div className="grid grid-cols-2 gap-4 pt-4 border-t border-gray-200">
+               <div>
+                 <label className="block text-xs font-bold mb-1">Date</label>
+                 <input type="text" {...register("date")} className="form-input w-full" placeholder="DD/MM/YYYY" />
+               </div>
+               <div>
+                 <label className="block text-xs font-bold mb-1">Place (Sthan)</label>
+                 <Controller
+                    control={control}
+                    name="place"
+                    render={({ field: { onChange, value } }) => (
+                      <ReactTransliterate
+                        value={value || ""}
+                        onChangeText={onChange}
+                        lang="hi"
+                        className="form-input w-full"
+                        placeholder="स्थान"
+                      />
+                    )}
+                  />
+               </div>
             </div>
 
             {/* Uploads */}
@@ -310,7 +414,7 @@ export default function RationCardFormPage() {
             </div>
 
             <button type="submit" disabled={isGenerating} className="btn-primary w-full py-3 flex items-center justify-center gap-2">
-              {isGenerating ? "Generating..." : <><Eye size={18} /> Preview Form PDF</>}
+              {isGenerating ? "Generating..." : <><Eye size={18} /> Preview Form PDF (3 Pages)</>}
             </button>
           </form>
         </div>
@@ -324,9 +428,9 @@ export default function RationCardFormPage() {
             {pdfUrl ? (
               <iframe src={pdfUrl} className="w-full h-full border-0" title="PDF Preview" />
             ) : (
-              <div className="flex flex-col items-center justify-center h-full text-gray-400">
+              <div className="flex flex-col items-center justify-center h-full text-gray-400 text-center px-6">
                 <FileText size={48} className="mb-4 opacity-50" />
-                <p>Fill the form and click Preview to see the PDF</p>
+                <p>Fill the details on the left and click <b>Preview</b> to generate the 3-page Ration Card PDF.</p>
               </div>
             )}
           </div>
